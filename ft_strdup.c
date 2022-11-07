@@ -1,36 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hugde-cl <hugde-cl@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/14 18:29:31 by hugde-cl          #+#    #+#             */
+/*   Updated: 2022/10/17 17:45:35 by hugde-cl         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
 
-char    *ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
-    int         i;
-    char    *str;
+	int		i;
+	char	*str;
 
-    i = 0;
-    str = (char *)s1;
-    str = malloc(sizeof(*str) * ft_strlen((char *) s1) + 1);
-    if (!str)
-        return (NULL);
-    while (str[i])
-    {
-        str[i] = s1[i];
-        i++;
-    }
-    str[i] = '\0';
-    return (str);
+	i = 0;
+	str = malloc(sizeof(char) * ft_strlen(s1) + 1);
+	if (!str)
+		return (NULL);
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }
-
-// int main()
-// {
-//     char *src = "hugo";
-//     char *mine = NULL;
-//     char *theirs = NULL;
-
-//     mine = ft_strdup(src);
-//     theirs = strdup(src);
-//     printf(":%s:\n:%s:\n", mine, theirs);
-//     return(0);
-// }

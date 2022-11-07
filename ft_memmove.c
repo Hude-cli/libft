@@ -1,36 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hugde-cl <hugde-cl@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/14 18:22:11 by hugde-cl          #+#    #+#             */
+/*   Updated: 2022/10/17 15:14:45 by hugde-cl         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-void *ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-    size_t i;
+	char		*d;
+	const char	*s;
+	int			i;
 
-    unsigned char *dst1;
-    const unsigned char *src1;
-    
-    i = 0;
-    dst1 =  (unsigned char *)dst;
-    src1 =  (unsigned char *)src;
-    if (!dst1 && !src1)
-        return(NULL);
-    if (src1 > dst1)
-        while(i < len)
-        {
-            dst1[i] = src1[i];
-            i++;
-        }
-    else
-    {
-        while (i != len)
-        {
-            dst1[len - i - 1] = src1[len - i - 1];
-            i++;
-        }
-    }
-    return(dst);
+	d = (char *)dst;
+	s = (const char *)src;
+	i = len - 1;
+	if (!dst && !src)
+	{
+		return (NULL);
+	}
+	if (d > s)
+	{
+		while (i >= 0)
+		{
+			d[i] = s[i];
+			i--;
+		}
+	}
+	else
+		ft_memcpy (dst, src, len);
+	return (dst);
 }
+// #include <string.h>
+// #include <stdio.h>
+
 // int main()
 // {
-//     char *a = "abc";
+//     char *a = "abcddd";
 //     char *b = "hugo";
 //     printf("%s\n", ft_memmove(a, b, 3));
 

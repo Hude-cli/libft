@@ -1,53 +1,55 @@
-#include "libft.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hugde-cl <hugde-cl@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/14 18:35:58 by hugde-cl          #+#    #+#             */
+/*   Updated: 2022/10/20 14:14:19 by hugde-cl         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static	int     ft_checkset(char c, char const *set)
+#include "libft.h"
+
+static	int	ft_checkset(char c, char *set)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (set[i])
 	{
 		if (set[i] == c)
-			return(1);
+			return (1);
 		i++;
 	}
 	return (0);
 }
 
-char *ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	char    *word;
-	size_t	start;
-	size_t	end;
-	size_t  i;
+	char	*word;
+	int		start;
+	int		end;
+	size_t	i;
 
+	i = 0;
 	if (!s1 || !set)
 		return (NULL);
-	start = 0;
-	while (s1[start] && ft_checkset(s1[start], set))
-		start++;
-	end = ft_strlen((char *)s1);
-	while (end > start && ft_checkset(s1[end - 1], set))
-		end--;
-	word = malloc(sizeof(s1) * ((end - start)) + 1);
+	while (s1[i] && ft_checkset(s1[i], (char *)set))
+		i++;
+	start = i;
+	if (s1[i])
+	{
+		while (s1[i])
+			i++;
+		while (ft_checkset(s1[i - 1], (char *)set))
+			i--;
+	}
+	end = ft_strlen(s1) - i;
+	word = malloc(sizeof(char) * (ft_strlen(s1) - start - end + 1));
 	if (!word)
 		return (NULL);
-	i = 0;
-	while (start < end)
-		word[i++] = s1[start++];
-	word[i] = 0;
+	ft_strlcpy(word, s1 + start, ft_strlen(s1) - end - start + 1);
 	return (word);
 }
-
-// int main()
-// {
-//     char const str1[] = "bonjourbon";
-//     char const str2[] = "bon";
-
-//     printf("%s\n", ft_strtrim(str1, str2));
-
-//     return (0);
-// }
